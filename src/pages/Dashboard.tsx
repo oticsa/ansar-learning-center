@@ -8,7 +8,9 @@ type Station = {
   title: string;
   subtitle: string;
   icon: typeof PenTool;
-  accent: string;
+  ring: string;
+  bg: string;
+  fg: string;
   route?: string;
   locked?: boolean;
 };
@@ -19,7 +21,9 @@ const STATIONS: Station[] = [
     title: "Writer Spider",
     subtitle: "IELTS essay studio + AI review",
     icon: PenTool,
-    accent: "secondary",
+    ring: "border-secondary/50",
+    bg: "bg-secondary/10",
+    fg: "text-secondary",
     route: "/writer-spider",
   },
   {
@@ -27,7 +31,9 @@ const STATIONS: Station[] = [
     title: "Talk About It",
     subtitle: "Speaking missions & lessons",
     icon: Mic,
-    accent: "primary",
+    ring: "border-primary/50",
+    bg: "bg-primary/10",
+    fg: "text-primary",
     locked: true,
   },
   {
@@ -35,7 +41,9 @@ const STATIONS: Station[] = [
     title: "E-Books",
     subtitle: "Read, answer, level up",
     icon: BookOpen,
-    accent: "accent",
+    ring: "border-accent/50",
+    bg: "bg-accent/10",
+    fg: "text-accent",
     locked: true,
   },
   {
@@ -43,7 +51,9 @@ const STATIONS: Station[] = [
     title: "Assignments",
     subtitle: "Tasks from your coach",
     icon: ClipboardList,
-    accent: "primary",
+    ring: "border-primary/50",
+    bg: "bg-primary/10",
+    fg: "text-primary",
     locked: true,
   },
 ];
@@ -112,9 +122,9 @@ export default function Dashboard() {
                 <div className="pointer-events-none absolute inset-0 grid-overlay opacity-40" />
                 <div className="relative flex items-start gap-4">
                   <div
-                    className={`flex h-14 w-14 shrink-0 rotate-45 items-center justify-center rounded-2xl border border-${s.accent}/50 bg-${s.accent}/10`}
+                    className={`flex h-14 w-14 shrink-0 rotate-45 items-center justify-center rounded-2xl border ${s.ring} ${s.bg}`}
                   >
-                    <Icon className={`h-6 w-6 -rotate-45 text-${s.accent}`} strokeWidth={1.7} />
+                    <Icon className={`h-6 w-6 -rotate-45 ${s.fg}`} strokeWidth={1.7} />
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-bold uppercase tracking-widest text-foreground">
