@@ -895,6 +895,45 @@ export type Database = {
         }
         Relationships: []
       }
+      writer_essays: {
+        Row: {
+          band_estimate: string | null
+          content: string
+          created_at: string
+          id: string
+          review: string | null
+          task_type: string
+          topic: string
+          updated_at: string
+          user_id: string
+          word_count: number
+        }
+        Insert: {
+          band_estimate?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          review?: string | null
+          task_type?: string
+          topic?: string
+          updated_at?: string
+          user_id: string
+          word_count?: number
+        }
+        Update: {
+          band_estimate?: string | null
+          content?: string
+          created_at?: string
+          id?: string
+          review?: string | null
+          task_type?: string
+          topic?: string
+          updated_at?: string
+          user_id?: string
+          word_count?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
