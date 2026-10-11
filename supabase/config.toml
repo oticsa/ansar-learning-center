@@ -2,3 +2,9 @@ project_id = "hzrophtralqxnmmtpuuv"
 
 [functions.writer-spider-review]
 verify_jwt = true
+
+[functions.grammar-check]
+verify_jwt = true
+
+[functions.analyze-word]
+verify_jwt = true
