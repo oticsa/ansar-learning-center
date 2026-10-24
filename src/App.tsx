@@ -47,6 +47,38 @@ export default function App() {
               </Protected>
             }
           />
+          <Route
+            path="/talk"
+            element={
+              <Protected>
+                <TalkAboutIt />
+              </Protected>
+            }
+          />
+          <Route
+            path="/ebooks"
+            element={
+              <Protected>
+                <EBooks />
+              </Protected>
+            }
+          />
+          <Route
+            path="/assignments"
+            element={
+              <Protected>
+                <Assignments />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <Protected>
+                <Admin />
+              </Protected>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

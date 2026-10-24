@@ -34,7 +34,7 @@ const STATIONS: Station[] = [
     ring: "border-primary/50",
     bg: "bg-primary/10",
     fg: "text-primary",
-    locked: true,
+    route: "/talk",
   },
   {
     id: "books",
@@ -44,7 +44,7 @@ const STATIONS: Station[] = [
     ring: "border-accent/50",
     bg: "bg-accent/10",
     fg: "text-accent",
-    locked: true,
+    route: "/ebooks",
   },
   {
     id: "assignments",
@@ -54,7 +54,7 @@ const STATIONS: Station[] = [
     ring: "border-primary/50",
     bg: "bg-primary/10",
     fg: "text-primary",
-    locked: true,
+    route: "/assignments",
   },
 ];
 
