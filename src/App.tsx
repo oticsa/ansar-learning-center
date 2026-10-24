@@ -4,6 +4,10 @@ import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import WriterSpider from "@/pages/WriterSpider";
+import TalkAboutIt from "@/pages/TalkAboutIt";
+import EBooks from "@/pages/EBooks";
+import Assignments from "@/pages/Assignments";
+import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
 
 function Protected({ children }: { children: JSX.Element }) {
