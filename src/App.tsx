@@ -4,6 +4,10 @@ import { AuthProvider, useAuth } from "@/hooks/useAuth";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
 import WriterSpider from "@/pages/WriterSpider";
+import TalkAboutIt from "@/pages/TalkAboutIt";
+import EBooks from "@/pages/EBooks";
+import Assignments from "@/pages/Assignments";
+import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
 
 function Protected({ children }: { children: JSX.Element }) {
@@ -40,6 +44,38 @@ export default function App() {
             element={
               <Protected>
                 <WriterSpider />
+              </Protected>
+            }
+          />
+          <Route
+            path="/talk"
+            element={
+              <Protected>
+                <TalkAboutIt />
+              </Protected>
+            }
+          />
+          <Route
+            path="/ebooks"
+            element={
+              <Protected>
+                <EBooks />
+              </Protected>
+            }
+          />
+          <Route
+            path="/assignments"
+            element={
+              <Protected>
+                <Assignments />
+              </Protected>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <Protected>
+                <Admin />
               </Protected>
             }
           />
