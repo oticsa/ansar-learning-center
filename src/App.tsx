@@ -9,9 +9,11 @@ import EBooks from "@/pages/EBooks";
 import Assignments from "@/pages/Assignments";
 import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
+import PendingApproval from "@/pages/PendingApproval";
+import { canEnterLessons } from "@/lib/access";
 
 function Protected({ children }: { children: JSX.Element }) {
-  const { user, loading } = useAuth();
+  const { user, profile, loading } = useAuth();
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -20,6 +22,8 @@ function Protected({ children }: { children: JSX.Element }) {
     );
   }
   if (!user) return <Navigate to="/login" replace />;
+  if (!profile) return <div className="p-8 text-center">Unable to load your account. Please refresh or sign in again.</div>;
+  if (!canEnterLessons(profile)) return <PendingApproval />;
   return children;
 }
 

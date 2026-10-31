@@ -567,6 +567,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          approval_status: string
           avatar_url: string
           created_at: string
           email: string
@@ -579,6 +580,7 @@ export type Database = {
           username: string | null
         }
         Insert: {
+          approval_status?: string
           avatar_url?: string
           created_at?: string
           email: string
@@ -591,6 +593,7 @@ export type Database = {
           username?: string | null
         }
         Update: {
+          approval_status?: string
           avatar_url?: string
           created_at?: string
           email?: string
@@ -895,6 +898,24 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       writer_essays: {
         Row: {
           band_estimate: string | null
@@ -939,10 +960,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      decide_student_registration: {
+        Args: { _approve: boolean; _student_id: string }
+        Returns: undefined
+      }
       get_user_role: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
       }
+      has_learning_access: { Args: never; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "coach" | "student"

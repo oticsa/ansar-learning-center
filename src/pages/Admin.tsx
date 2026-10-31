@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { ArrowLeft, ShieldCheck, Check, X, Loader2, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/Button";
 
 type PendingStudent = {
   id: string;
@@ -41,6 +42,7 @@ export default function Admin() {
         .select("id, email, full_name, nickname, created_at")
         .eq("role", "student")
         .eq("is_active", false)
+        .eq("approval_status", "pending")
         .order("created_at", { ascending: false }),
       supabase
         .from("registration_notifications")
@@ -61,14 +63,15 @@ export default function Admin() {
   const decide = async (s: PendingStudent, approve: boolean) => {
     setBusyId(s.id);
     try {
+      const { error } = await supabase.rpc("decide_student_registration", { _student_id: s.id, _approve: approve });
+      if (error) throw error;
       if (approve) {
-        const { error } = await supabase.from("profiles").update({ is_active: true }).eq("id", s.id);
-        if (error) throw error;
         toast.success(`${s.full_name || s.email} approved — they can now sign in.`);
       } else {
         toast.success(`${s.full_name || s.email} rejected — the account stays inactive.`);
       }
       setPending((list) => list.filter((x) => x.id !== s.id));
+      await load();
     } catch (err: any) {
       toast.error(err?.message ?? "Could not update the account.");
     } finally {
