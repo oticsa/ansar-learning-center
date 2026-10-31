@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Orbit, Mail, Lock, User as UserIcon, ArrowRight, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/Button";
 
 function ConsoleMark() {
   return (
@@ -25,6 +26,9 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [avatar, setAvatar] = useState("🚀");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -40,12 +44,12 @@ export default function Login() {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
-            data: { full_name: fullName },
+            emailRedirectTo: `${window.location.origin}/login`,
+            data: { full_name: fullName.trim(), nickname: nickname.trim(), phone: phone.trim(), avatar_url: avatar },
           },
         });
         if (error) throw error;
-        toast.success("Account created. Check your email to confirm it.");
+        toast.success("Registration received. Confirm your email, then wait for admin approval before accessing lessons.");
         setMode("signin");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -109,6 +113,14 @@ export default function Login() {
               />
             </div>
           )}
+
+          {mode === "signup" && <>
+            <input className="field" aria-label="Nickname" placeholder="Nickname" value={nickname} onChange={e => setNickname(e.target.value)} required maxLength={80} />
+            <input className="field" aria-label="Phone (optional)" placeholder="Phone (optional)" type="tel" value={phone} onChange={e => setPhone(e.target.value)} maxLength={30} />
+            <div className="flex justify-center gap-2" role="group" aria-label="Choose an avatar">
+              {["🚀", "🪐", "🔬", "🤖", "🌟"].map(emoji => <Button key={emoji} type="button" aria-label={`Avatar ${emoji}`} aria-pressed={avatar === emoji} onClick={() => setAvatar(emoji)} className={`rounded-lg border p-3 text-xl ${avatar === emoji ? "border-secondary bg-secondary/10" : "border-border"}`}>{emoji}</Button>)}
+            </div>
+          </>}
 
           <div className="relative">
             <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

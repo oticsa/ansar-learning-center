@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PenTool, Mic, BookOpen, ClipboardList, LogOut, Orbit } from "lucide-react";
+import { PenTool, Mic, BookOpen, ClipboardList, LogOut, Orbit, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/Button";
 import { useAuth } from "@/hooks/useAuth";
 
 type Station = {
@@ -81,10 +82,13 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <button onClick={signOut} className="console-btn-ghost !px-4 !py-2">
+        <div className="flex gap-2">
+        {profile?.role === "admin" && <Button onClick={() => navigate("/admin")}><ShieldCheck className="h-4 w-4" /> Admin</Button>}
+        <Button onClick={signOut} className="console-btn-ghost !px-4 !py-2">
           <LogOut className="h-4 w-4" />
           <span className="hidden sm:inline">Exit</span>
-        </button>
+        </Button>
+        </div>
       </header>
 
       <section className="relative z-10 mx-auto mt-10 w-full max-w-5xl">
