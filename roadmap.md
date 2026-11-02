@@ -7,5 +7,5 @@
 - [x] Unlock dashboard cubes + add routes
 - [ ] Verify student approval, durable rejection, pending access screen, and module readback
 - [ ] Deliver registration email to roboticsansar@gmail.com and approval email to student — blocked until sender domain setup
-- [ ] Security fixes: RLS on user_presence, email_templates, chat_rooms
+- [x] Security fixes: RLS on user_presence, email_templates, chat_rooms
 - [ ] Deploy edge functions, verify build + preview
