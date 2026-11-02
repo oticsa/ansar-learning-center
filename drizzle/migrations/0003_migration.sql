@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS "Anyone can read messages" ON public.chat_messages;
+CREATE POLICY "Approved users can read messages" ON public.chat_messages FOR SELECT TO authenticated USING (public.has_learning_access());
